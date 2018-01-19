@@ -1,0 +1,20 @@
+div(class="medium-6 columns medium-push-2")
+	h2(class="text-center") Green Space
+	h3(class="text-center") Just come and get all things done
+	div(class="row column")
+		div(class="button-group expanded")
+			a(class="button") Google +
+			a(class="button") Facebook
+	hr
+	div(class="row")
+		form(ng-submit="vm.ctrl.submitLogin()")
+			div(class="column small-12")
+				label Phone / Email
+					input(type="text", ng-model="vm.model.user.username" required)
+			div(class="column small-12")
+				label Password
+					input(type="password", ng-model="vm.model.user.password" required)
+			div(class="column small-12 text-center")
+				input(class="button" type="submit" value="Login")
+		div(class="column small-12 text-center")
+			<span>Don't have an account? <a href="#!/register">Sign up</a></span>
