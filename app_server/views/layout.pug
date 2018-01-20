@@ -10,20 +10,82 @@ html(ng-app='App')
 		link(rel="stylesheet", href="/css/utility.css")
 
 	body(ng-controller="LayoutCtrl")
-		div(class="off-canvas position-right" id="offCanvas" data-off-canvas)
-			<div class="card">
-				<div class="card-section">
-					<img src="http://via.placeholder.com/150x150">
-				</div>
-				<div class="card-section">
-					<p>{{ vm.user.fullname }}</p>
-					a(href="{{ vm.user.profile }}") Xem profile
-				</div>
-			</div>
+		// Search - Reveal component
+		div(class="reveal searchBarWrapper hide-for-large" id="searchBarReveal" data-reveal data-overlay="false")
+			// Search bar
+			div(class="searchBar")
+				ul(class="menu")
+					li(class="menu-text resetInputButton iconComponent" ng-click="vm.search.resetQuery ()")
+						i(class="material-icons") close
+					li(class="menu-text closeRevealButton close-button iconComponent" data-close ng-click="vm.search.close ()")
+						i(class="material-icons") arrow_back				
+					li(class="inputWrapper")
+						form(ng-submit="vm.search.search ()")
+							input(class="maxWidth100 margin0" type="search" placeholder="Search" ng-model='vm.search.model.query' ng-change='vm.search.handleChange ()')
+				div(class="suggestionWrapper")
+					ul(ng-if="vm.search.model.suggestions" class="vertical menu suggestions")
+						li(class="" ng-repeat="item in vm.search.model.suggestions" ng-click="vm.search.selectSuggestion (item.content)")
+							a {{ item.content}}
+			// Categories bar
+			div(ng-if="vm.search.model.categories.exist")
+				ul(class="menu categories expanded")
+					li(ng-repeat="cat in vm.search.model.categories.categories")
+						a(class="button", ng-click="vm.search.search ($index)") {{ cat }}
 
-			ul(class="menu vertical")
-				li(ng-repeat="item in vm.dom.model.mobile.menu")
-					a(ng-if="item.link"  href="{{ item.link }}") {{ item.name }}	
+			// Search results
+			div(ng-if="vm.search.model.results" class="menu contentContainer")
+				div(ng-repeat="item in vm.search.model.results" class="contentItem")
+					div
+						h2(class="contentTitle")
+							a(href="{{item.link}}") {{ item.title}}
+					div(class="grid-x contentAuthor")
+						div(class="small-6 cell")
+							a(class="" href="{{ item.user.profile }}") {{ item.user.fullname }}
+						div(class="small-6 cell")
+							a(class="text-right" href="{{ item.link }}") {{ item.createdAt | date:"dd-MM-yyyy HH:mm"}}
+					div(class="grid-x contentText")
+						div(class="cell")
+							p {{ item.content }}
+					div(class="grid-x grid-margin-x")
+						div(class="small-6 cell")
+							ul(class="menu reactionList oneTheLeft")
+								li
+									a(class="paddingL0 statValWrapper iconComponent")
+										i(class="material-icons") thumb_up
+										span(class="statVal auxiliaryText") {{ item.reaction.up }}
+								li
+									a(class="paddingL0 statValWrapper iconComponent")
+										i(class="material-icons") share
+										span(class="statVal auxiliaryText") {{ item.reaction.share }}
+						div(class="small-6 cell")
+							ul(class="menu float-right reactionList oneTheRight")
+								li
+									a(class="paddingR0 statValWrapper iconComponent")
+										i(class="material-icons") bookmark
+										span(class="statVal auxiliaryText") {{ item.reaction.save }}
+			div(ng-if="vm.search.model.notFound.status" class="grid-x")
+				div(class="small-12 cell")
+					p {{ vm.search.model.notFound.content }}
+
+		// Side menu									
+		div(class="off-canvas position-right" id="sideBarMenu" data-off-canvas)
+			// Profile
+			div(class="card profileBox")
+				div(class="card-section")
+					img(src="http://via.placeholder.com/50x50")
+				div(class="card-section")
+					a(href="{{ vm.user.model.profile }}" class="titleText") {{ vm.user.model.fullname }}
+			// Activities menu
+			div(id="actionMenu")
+				ul(class="menu vertical itemList")
+					li(ng-repeat="item in vm.actionMenu.model.menu.mobile.management")
+						a(ng-if="item.link"  href="{{ item.link }}" class="{{vm.actionMenu.model.menu.mobile.mngtFocus.indexOf (item.name) != -1 ? 'mngtFocus' : '' }}") {{ item.name }}	
+				ul(class="menu vertical businessMenu itemList")
+					li(ng-repeat="item in vm.actionMenu.model.menu.mobile.business")
+						a(ng-if="item.link" href="{{ item.link }}" class="{{vm.actionMenu.model.menu.mobile.bizFocus.indexOf (item.name) != -1 ? 'bizFocus' : '' }}") {{ item.name }}
+				ul(class="menu vertical itemList")
+					li(ng-repeat="item in vm.actionMenu.model.menu.mobile.social")
+						a(ng-if="item.link"  href="{{ item.link }}") {{ item.name }}
 
 		// Desktop top bar 
 		//nav(class="show-for-large top-bar paddingLR0" id="topNavBar")
@@ -48,31 +110,30 @@ html(ng-app='App')
 							li(ng-click=''): a Logout
 
 		// Mobile top bar					
-		div(class="top-bar hide-for-large")
+		div(class="top-bar hide-for-large" id="mobileTopBar")
 			div(class="top-bar-left")
 				ul(class="menu float-left")
 					li
 						a(href="" class="title-bar-title title paddingAll07rem") LOGO
 				ul(class="menu float-right")
 					li
-						a(class="dropDownNoIcon paddingAll07rem" ng-click='')
+						a(class="dropDownNoIcon paddingAll07rem iconComponent" ng-click='')
 							i(class="material-icons") notifications
 					li
-						a(class="dropDownNoIcon paddingAll07rem" data-toggle="offCanvas")
+						a(class="dropDownNoIcon paddingAll07rem iconComponent" ng-click='' data-open="searchBarReveal")
+							i(class="material-icons") search
+					li
+						a(class="dropDownNoIcon paddingAll07rem iconComponent" data-toggle="sideBarMenu")
 							i(class="material-icons") reorder
-			div(class="top-bar-right paddingAll07rem paddingTB0 searchBar")
-				input(class="maxWidth100 margin0" type="search" placeholder="Search" ng-model='vm.search.model.query' ng-change='vm.search.handleChange ()')
-				ul(class="vertical menu suggestionsDiv")
-					li(ng-repeat="item in vm.search.model.suggestions")
-						a(ng-if="item.link" href="item.link") {{ item.content}}
-
+		
 		//div(class='top-bar hide-for-large' id='mainMenu' ng-show='true')
 			div
 				ul(class="menu vertical")
 					li(ng-click=''): a(href='') Đánh dấu
 					li(ng-click=''): a(href='') Theo dõi
 					li(ng-click=''): a(href='')
-		div
+
+		div(class="grid-container fluid" id="mainContentContainer")
 			ng-view
 
 		script(type="text/javascript" src="/vendor/js/angular.min.js")
@@ -89,3 +150,6 @@ html(ng-app='App')
 		script(type="text/javascript" src="/controllers/home.ctrl.js")
 		script(type="text/javascript" src="/controllers/login.ctrl.js")
 		script(type="text/javascript" src="/controllers/register.ctrl.js")
+
+		// DEVELOPMENT PHASE ONLY!
+		script(type="text/javascript" src="/services/testdata.service.js")

@@ -1,6 +1,28 @@
+/* Foundation component */
+a {
+	color: #0A0A0A;
+}
+
+a:focus {
+	color: #0A0A0A;
+}
+
+a:hover {
+	color: #0A0A0A;
+}
+
+a:visted{
+	color: #0A0A0A;
+}
+
+
 /* Dimension */
 .marginLeft1rem{
 	margin-left: 1rem;
+}
+
+.marginB0{
+	margin-bottom: 0!important;
 }
 
 .margin0{
@@ -13,6 +35,18 @@
 
 .paddingTB0{
 	padding-top: 0!important;
+}
+
+.paddingL0{
+	padding-left: 0!important;
+}
+
+.paddingR0{
+	padding-right: 0!important;
+}
+
+.padding0{
+	padding: 0!important;
 }
 
 /* Positions */
@@ -34,15 +68,269 @@
 }
 
 /* Component: Search bar */
-.searchBar {}
-
-.suggestionsDiv {}
-
-.searchBar > ul.suggestionsDiv{
-	position: absolute;
-	width: 90%;
+.searchBarWrapper {
+	/*background-color: #e6e6e6;*/
 	background-color: white;
-	border-left: 1px solid #e6e6e6;
+	padding: 0;
+	top: 0!important;
+	left: 0!important;
+	height: 100%;
+	width: 100%;
 	border-bottom: 1px solid #e6e6e6;
-	border-right: 1px solid #e6e6e6;;
+	box-shadow: 0 1px 5px #e6e6e6;
 }
+
+.searchBar {
+	padding: 0.7rem;
+	background-color: white;
+
+}
+
+.searchBar > .suggestionWrapper {
+	position: relative;
+}
+
+.searchBar ul.suggestions{
+	position: absolute;
+	width: 100%;
+	padding: 1px;
+	background-color: white;
+	border-bottom: 1px solid #A0A0A0;
+	border-left: 1px solid #A0A0A0;
+	border-right: 1px solid #A0A0A0;
+	box-shadow: 0 1px 5px #CCCCCC;
+	z-index: 1008; /* greater than the z-index of the seachBar 2 value */
+}
+
+.searchBar ul.suggestions > li{
+	padding: .7rem .7rem;
+}
+
+.searchBar ul.suggestions > li:hover{
+	background-color: #EEEEEE;
+}
+
+.searchBar .inputWrapper {
+	width: 100%;
+}
+
+.searchBar .inputWrapper input:focus {
+	/*border-bottom: 1px solid #A0A0A0;*/
+	box-shadow: 0 1px 5px #E6E6E6;
+}
+
+.searchBar input{
+	border: none;
+	box-shadow: none;
+	padding-left: 45px;
+	padding-right: 45px;
+	padding-bottom: 0;
+	padding-top: 0;
+}
+
+.searchBar input:focus{
+	/*border-bottom: none;*/
+	box-shadow: none!important;
+}
+
+/* A list of items */
+.itemList {
+	padding: 0 1px;
+}
+
+.itemList > li:hover{
+	background-color: #EEEEEE;
+}
+
+.itemList > li > a{
+	padding: 0;
+}
+
+.itemList > li{
+	padding: .7rem 1rem;
+}
+
+
+/* Close reveal button */
+.closeRevealButton {
+	padding-bottom: 0!important;
+	padding-top: 0.5rem!important;
+	padding-left: 0!important;
+	position: absolute;
+}
+
+.closeRevealButton.close-button{
+	right:inherit;
+	top:inherit;
+	left: 10px;
+	font-size:inherit 
+}
+
+/* Reset-input button */
+.resetInputButton {
+	position: absolute;
+	right:10px;
+	padding-bottom: 0!important;
+	padding-top: 0.5rem!important;
+	padding-right: 0!important;
+	cursor: pointer;
+}
+
+/* Result Box: suggestion, search result, and so on */
+#searchBarReveal .categories {
+
+}
+
+#searchBarReveal .categories {
+	border-bottom: 1px solid #A0A0A0;
+	padding: 0 0.7rem
+}
+
+#searchBarReveal .categories li > .button:hover{
+	background-color: transparent;
+	color: #0A0A0A;
+	font-weight: 600;
+}
+
+#searchBarReveal .categories li > a{
+	padding: 1rem 0.5rem;
+	color: #A0A0A0;
+	background-color: transparent;
+
+}
+
+/* A general containt container: a list of document, a list of search results, and so on */
+.contentContainer{
+	
+}
+
+.contentContainer > .contentItem{
+	border-bottom: 1px solid #CCCCCC;
+	padding: .5rem .7rem;
+}
+
+.contentContainer > .contentItem:last-child{
+	border-bottom: none;
+}
+
+.contentItem .contentTitle > a{
+	padding-left: 0!important;
+	padding-right: 0!important;
+	font-weight: 600;
+}
+
+.contentItem .contentAuthor a{
+	padding: 0.2rem .5rem 0 0!important;
+	color: #A0A0A0;
+	font-size: 0.9rem;
+}
+
+.contentItem .contentText{
+	padding: 1rem 0;
+}
+
+.contentItem .contentText p{
+	margin-bottom: 0;
+}
+
+.contentItem .reactionList {
+	color: #A0A0A0;
+	font-size: 0.9rem;	
+}
+
+/* Reaction list: often used with a document like a status post or an article */
+.reactionList {
+
+}
+
+.reactionList.oneTheRight{
+	padding-right: 30px;
+}
+
+.reactionList li > a{
+	padding-left: 0;
+	padding-right: 0
+}
+
+.reactionList.oneTheLeft > li{
+	padding-right: 50px;
+}
+
+.reactionList.oneTheLeft > li:last-child{
+	padding-right: 0;
+}
+
+.reactionList .statValWrapper {
+	position: relative;
+}
+
+.reactionList .statVal {
+	position: absolute;
+	top: 18px;
+	left: 30px;
+}
+
+
+/* Icon component */
+.iconComponent{
+	color: #A0A0A0;
+}
+
+.iconComponent:hover{
+	color: #0A0A0A;
+}
+
+
+/* Side bar menu */
+
+#sideBarMenu {
+	background-color: #E0E0E0;
+}
+
+#sideBarMenu > div {
+}
+
+#actionMenu {
+}
+
+#actionMenu > ul{
+	border-bottom: 1px solid #A0A0A0;
+	box-shadow: 0 1px 5px #E6E6E6;
+}
+
+#actionMenu > ul:last-child{
+	border-bottom: none;
+}
+
+#actionMenu .bizFocus {
+	color: #EF4040;
+}
+
+#actionMenu .mngtFocus {
+	font-weight: 600;
+}
+
+.profileBox{
+	margin-bottom: 0;
+	padding: 1rem 0;
+}
+
+.profileBox > *{
+	padding: 0.7rem 1rem;
+}
+
+
+/* Auxiliary text */
+.auxiliaryText{
+	color: #A0A0A0;
+}
+
+.auxiliaryText:hover{
+	color: #A0A0A0;
+}
+
+.titleText{
+	font-weight: 600;
+	color: #0A0A0A;
+}
+

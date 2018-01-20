@@ -1,1 +1,30 @@
-h1 {{"Hello " + vm.user.fullname }} 
+div(ng-if="vm.stories.model.stories" class="menu contentContainer" )
+	div(ng-repeat="item in vm.stories.model.stories" class="contentItem")
+		div
+			h2(class="contentTitle")
+				a(ng-click="vm.stories.get ($index)") {{ item.title}}
+		div(class="grid-x contentAuthor")
+			div(class="small-6 cell ")
+				a(class="" ng-click="vm.user.profile (item.user)") {{ item.user.fullname }}
+			div(class="small-6 cell")
+				a(class="text-right" ng-click="vm.stories.get ($index)") {{ item.createdAt | date:"dd-MM-yyyy HH:mm"}}
+		div(class="grid-x contentText")
+			div(class="cell")
+				p {{ item.content }}
+		div(class="grid-x grid-margin-x")
+			div(class="small-6 cell")
+				ul(class="menu reactionList oneTheLeft")
+					li
+						a(class="paddingL0 statValWrapper iconComponent")
+							i(class="material-icons") thumb_up
+							span(class="statVal auxiliaryText") {{ item.reaction.up }}
+					li
+						a(class="paddingL0 statValWrapper iconComponent")
+							i(class="material-icons") share
+							span(class="statVal auxiliaryText") {{ item.reaction.share }}
+			div(class="small-6 cell")
+				ul(class="menu float-right reactionList oneTheRight")
+					li
+						a(class="paddingR0 statValWrapper iconComponent")
+							i(class="material-icons") bookmark
+							span(class="statVal auxiliaryText") {{ item.reaction.save }}
