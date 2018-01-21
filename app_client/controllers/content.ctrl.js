@@ -12,7 +12,7 @@
 			this.model = {};
 
 			this.ready = function (){
-				Layout.dom.showBackBtn ();
+				Layout.dom.showOtherPageNavBar ();
 			}
 		}
 

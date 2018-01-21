@@ -27,7 +27,7 @@ router.get('/template/register', OthersCtrl.registerTemplate);
 router.get('/template/publish', OthersCtrl.publishTemplate);
 router.get('/template/profile', OthersCtrl.profileTemplate);
 router.get('/template/content', OthersCtrl.contentTemplate);
-
+router.get('/template/search', OthersCtrl.searchTemplate);
 // //Login page
 // router.get('/login', OthersCtrl.login);
 // router.get('/register', OthersCtrl.register);

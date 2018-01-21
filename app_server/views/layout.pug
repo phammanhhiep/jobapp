@@ -10,67 +10,6 @@ html(ng-app='App')
 		link(rel="stylesheet", href="/css/utility.css")
 
 	body(ng-controller="LayoutCtrl")
-		// Search - Reveal component
-		div(class="reveal searchBarWrapper hide-for-large" id="searchBarReveal" data-reveal data-overlay="false")
-			// Search bar
-			div(class="searchBar")
-				ul(class="menu")
-					li(class="menu-text resetInputButton iconComponent" ng-click="vm.search.resetQuery ()")
-						i(class="material-icons") close
-					li(class="menu-text closeRevealButton close-button iconComponent" data-close ng-click="vm.search.close ()")
-						i(class="material-icons") arrow_back				
-					li(class="inputWrapper")
-						form(ng-submit="vm.search.search ()")
-							input(class="maxWidth100 margin0" type="search" placeholder="Search" ng-model='vm.search.model.query' ng-change='vm.search.handleChange ()')
-				div(class="suggestionWrapper")
-					ul(ng-if="vm.search.model.suggestions" class="vertical menu suggestions")
-						li(class="" ng-repeat="item in vm.search.model.suggestions" ng-click="vm.search.selectSuggestion (item.content)")
-							a {{ item.content}}
-			// Categories bar
-			div(ng-if="vm.search.model.categories.exist")
-				ul(class="menu categories expanded")
-					li(ng-repeat="cat in vm.search.model.categories.categories")
-						a(class="button", ng-click="vm.search.search ($index)") {{ cat }}
-
-			// Search results
-			div(ng-if="vm.search.model.results" class="menu contentContainer")
-				div(ng-repeat="item in vm.search.model.results" class="contentItem")
-					div
-						h2(class="contentTitle")
-							a(href="{{item.link}}") {{ item.title}}
-					div(class="grid-x contentAuthor")
-						div(class="small-6 cell")
-							a(class="" href="{{ item.user.profile }}") {{ item.user.fullname }}
-						div(class="small-6 cell")
-							a(class="text-right" href="{{ item.link }}") {{ item.createdAt | date:"dd-MM-yyyy HH:mm"}}
-					div(class="grid-x contentText")
-						div(class="cell")
-							p {{ item.content }}
-					div(class="grid-x grid-margin-x")
-						div(class="small-9 cell")
-							ul(class="menu reactionList oneTheLeft")
-								li
-									a(class="paddingL0 statValWrapper iconComponent")
-										i(class="material-icons") thumb_up
-										span(class="statVal auxiliaryText") {{ item.reaction.up }}
-								li
-									a(class="paddingL0 statValWrapper iconComponent")
-										i(class="material-icons") comment
-										span(class="statVal auxiliaryText") {{ item.reaction.comment }}
-								li
-									a(class="paddingL0 statValWrapper iconComponent")
-										i(class="material-icons") share
-										span(class="statVal auxiliaryText") {{ item.reaction.share }}
-						div(class="small-3 cell")
-							ul(class="menu float-right reactionList oneTheRight")
-								li
-									a(class="paddingR0 statValWrapper iconComponent")
-										i(class="material-icons") bookmark
-										span(class="statVal auxiliaryText") {{ item.reaction.save }}
-			div(ng-if="vm.search.model.notFound.status" class="grid-x")
-				div(class="small-12 cell")
-					p {{ vm.search.model.notFound.content }}
-
 		// Side menu									
 		div(class="off-canvas position-right" id="sideBarMenu" data-off-canvas)
 			// Profile
@@ -114,20 +53,20 @@ html(ng-app='App')
 							li(ng-click=''): a Logout
 
 		// Mobile top bar					
-		div(class="top-bar hide-for-large" id="mobileTopBar")
+		div(class="top-bar hide-for-large" id="mobileTopBar" ng-if="vm.dom.model.mobileNavMenu.display")
 			ul(class="menu float-left")
-				li(ng-if="vm.dom.model.mobileNavMenu.display")
+				li(ng-if="vm.dom.model.mobileNavMenu.logo.display")
 					a(href="" class="title-bar-title title paddingAll07rem") JOBS
 				li(ng-if="vm.dom.model.backbtn.display")
 					a(class="iconComponent"): i(class="material-icons" ng-click="vm.backbtn.back ()") arrow_back
 			ul(class="menu float-right")
-				li(ng-if="vm.dom.model.mobileNavMenu.display")
+				li(ng-if="vm.dom.model.mobileNavMenu.noti.display")
 					a(class="dropDownNoIcon paddingAll07rem iconComponent" ng-click='')
 						i(class="material-icons") notifications
-				li(ng-if="vm.dom.model.mobileNavMenu.display")
-					a(class="dropDownNoIcon paddingAll07rem iconComponent" ng-click='' data-open="searchBarReveal")
+				li(ng-if="vm.dom.model.mobileNavMenu.search.display")
+					a(class="dropDownNoIcon paddingAll07rem iconComponent" ng-click='' href="/#!/search")
 						i(class="material-icons") search
-				li(ng-if="vm.dom.model.mobileNavMenu.display")
+				li(ng-if="vm.dom.model.mobileNavMenu.sidemenu.display")
 					a(class="dropDownNoIcon paddingAll07rem iconComponent" data-toggle="sideBarMenu")
 						i(class="material-icons") reorder
 				li(ng-if="vm.dom.model.publishbtn.display")
@@ -154,5 +93,6 @@ html(ng-app='App')
 		script(type="text/javascript" src="/controllers/publish.ctrl.js")
 		script(type="text/javascript" src="/controllers/profile.ctrl.js")
 		script(type="text/javascript" src="/controllers/content.ctrl.js")
+		script(type="text/javascript" src="/controllers/search.ctrl.js")
 		// DEVELOPMENT PHASE ONLY!
 		script(type="text/javascript" src="/services/testdata.service.js")

@@ -17,7 +17,7 @@
 			};
 
 			this.ready = function (){
-				Layout.dom.showPublishBtn ();
+				Layout.dom.showPublishNavBar ();
 			};
 		}
 

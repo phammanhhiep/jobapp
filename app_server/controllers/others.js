@@ -34,4 +34,8 @@ function Others (){
 		res.render ('content');
 	};
 
+	this.searchTemplate = function (req, res, next){
+		res.render ('search');
+	};
+
 }

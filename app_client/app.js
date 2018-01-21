@@ -53,6 +53,14 @@ function config ($routeProvider){
 			// },			
 			controller: 'ContentCtrl',
 			controllerAs: 'vm',					
-		})						
+		})
+		.when ('/search', {
+			templateUrl: '/template/search',
+			// resolve: {
+			// 	'checkAuth': ['$q', 'authentication','$location', '$rootScope', checkAuth]
+			// },			
+			controller: 'SearchCtrl',
+			controllerAs: 'vm',					
+		})							
 		.otherwise ({redirectTo: '/'});	
 };

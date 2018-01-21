@@ -1,0 +1,56 @@
+div(class="searchBarWrapper" id="searchBarReveal")
+	// Search bar
+	div(class="searchBar")
+		ul(class="menu")
+			li(class="menu-text resetInputButton iconComponent" ng-click="vm.search.resetQuery ()")
+				i(class="material-icons") close
+			li(class="menu-text closeRevealButton close-button iconComponent" data-close ng-click="vm.search.close ()")
+				i(class="material-icons") arrow_back				
+			li(class="inputWrapper")
+				form(ng-submit="vm.search.search ()")
+					input(class="maxWidth100 margin0" type="search" placeholder="Search" ng-model='vm.search.model.query' ng-change='vm.search.handleChange ()')
+		div(class="suggestionWrapper")
+			ul(ng-if="vm.search.model.suggestions" class="vertical menu suggestions")
+				li(class="" ng-repeat="item in vm.search.model.suggestions" ng-click="vm.search.selectSuggestion (item.content)")
+					a {{ item.content}}
+	// Categories bar
+	div(ng-if="vm.dom.model.categories.exist")
+		ul(class="menu categories expanded")
+			li(ng-repeat="cat in vm.dom.model.categories.categories")
+				a(class="button", ng-click="vm.search.search ($index)") {{ cat }}
+
+	// Results
+	div(ng-if="vm.search.model.results" class="menu contentContainer")
+		div(ng-repeat="item in vm.search.model.results" class="contentItem")
+			div
+				h2(class="contentTitle")
+					a(href="{{item.link}}") {{ item.title}}
+			div(class="grid-x contentAuthor")
+				div(class="small-6 cell")
+					a(class="" href="{{ item.user.profile }}") {{ item.user.fullname }}
+				div(class="small-6 cell")
+					a(class="text-right" href="{{ item.link }}") {{ item.createdAt | date:"dd-MM-yyyy HH:mm"}}
+			div(class="grid-x contentText")
+				div(class="cell")
+					p {{ item.content }}
+			div(class="grid-x grid-margin-x")
+				div(class="small-9 cell")
+					ul(class="menu reactionList oneTheLeft")
+						li
+							a(class="paddingL0 statValWrapper iconComponent")
+								i(class="material-icons") thumb_up
+								span(class="statVal auxiliaryText") {{ item.reaction.up }}
+						li
+							a(class="paddingL0 statValWrapper iconComponent")
+								i(class="material-icons") comment
+								span(class="statVal auxiliaryText") {{ item.reaction.comment }}
+						li
+							a(class="paddingL0 statValWrapper iconComponent")
+								i(class="material-icons") share
+								span(class="statVal auxiliaryText") {{ item.reaction.share }}
+				div(class="small-3 cell")
+					ul(class="menu float-right reactionList oneTheRight")
+						li
+							a(class="paddingR0 statValWrapper iconComponent")
+								i(class="material-icons") bookmark
+								span(class="statVal auxiliaryText") {{ item.reaction.save }}

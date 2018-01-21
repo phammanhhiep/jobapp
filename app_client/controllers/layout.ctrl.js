@@ -15,38 +15,61 @@
 				},
 				mobileNavMenu: {
 					display: true,
+					logo: {display: true},
+					search: {display: true},
+					noti: {display: true},
+					sidemenu: {display: true},
 				},
 				publishbtn:{
 					display: false,
-				}
+				},
+
 			};
 
 			this.resetMobileNavBarMenu = function (){
 				this.model.mobileNavMenu.display = true;
+				this.model.mobileNavMenu.logo.display = true;
+				this.model.mobileNavMenu.search.display = true;
+				this.model.mobileNavMenu.noti.display = true;
+				this.model.mobileNavMenu.sidemenu.display = true;
 				this.model.publishbtn.display = false;
 				this.model.backbtn.display = false;
 			}
 
-			this.hideNavBarMenu = function (){
+			this.hideNavBar = function (){
 				this.model.mobileNavMenu.display = false;
-				
-			};
+			}
 
-			this.showNavBarMenu = function (){
-				this.model.mobileNavMenu.display = true;
+			this.hideNavBarMenu = function (){
+				this.model.mobileNavMenu.logo.display = false;
+				this.model.mobileNavMenu.search.display = false;
+				this.model.mobileNavMenu.noti.display = false;
+				this.model.mobileNavMenu.sidemenu.display = false;
 			};			
 
 			this.showBackBtn = function (){
 				this.model.backbtn.display = true;
-				this.model.backbtn.lastPage = ''; // last page id or sth
+				// this.model.backbtn.lastPage = ''; // last page id or sth
+			};
+
+			this.showPublishNavBar = function (){
+				this.resetMobileNavBarMenu ();
+				this.model.publishbtn.display = true;
+				this.showBackBtn ();
 				this.hideNavBarMenu ();
 			};
 
-			this.showPublishBtn = function (){
-				this.model.publishbtn.display = true;
+			this.showOtherPageNavBar = function (){
+				this.resetMobileNavBarMenu ();
 				this.showBackBtn ();
-			};		
+				this.hideNavBarMenu ();
+				this.model.mobileNavMenu.search.display = true;
+			};
 
+			this.showSearchNavBar = function (){
+				this.resetMobileNavBarMenu ();
+				this.hideNavBar ();
+			}
 
 			this.lastPage = function (){
 				// navigate to the last page
@@ -88,7 +111,7 @@
 				menu:{
 					mobile: {
 						management:[
-							{name: 'Trang chủ', link: '#'},
+							{name: 'Trang chủ', link: '/#!/'},
 							{name: 'Lĩnh vực ưu thích', link: '#'},
 							{name: 'Nội dung đã lưu', link: '#'},						
 						],						
@@ -99,106 +122,14 @@
 							{name: 'Hỏi đáp nghề nghiệp', link: '#'},
 						],
 						business:[
-							{name: 'Đăng tin tuyển dụng', link: '#'},
-							{name: 'Tìm việc', link: '#'}
+							{name: 'Đăng tin tuyển dụng', link: '/#!/publish'},
+							{name: 'Tìm việc', link: '/#!/search'}
 						],
 						bizFocus: ['Đăng tin tuyển dụng'],
 						mngtFocus: ['Trang chủ'],
 					}
 				},
 			}
-		}();
-
-		vm.search = new function (){
-			this.model = {
-				query: '',
-				results: null,
-				suggestions: null,
-				lastTermNum: 2,
-				categories: {
-					exist: true,
-					categories: ['Việc làm', 'Blog', 'Cá nhân', 'Tổ chức'],
-				},
-				notFound: {
-					status: false,
-					content: '',
-				}
-			};
-
-			this.close = function (){
-				/*
-				Close the search div and reset all component of the search div.
-				*/
-				this.model.query = '';
-				this.model.results = '';
-				this.model.suggestions = null;
-				this.model.lastTermNum = 2;
-			};
-
-			this.resetSuggestions = function (){
-				this.model.lastTermNum = 2;
-				this.model.suggestions = null;
-			};
-
-			this.resetQuery = function (){
-				if (this.model.query){
-					this.model.query = '';
-					this.handleChange ();					
-				}
-			};
-
-			this.resetNotFound = function (){
-				this.model.notFound.status = false;
-				this.model.notFound.content = '';
-			}
-
-			this.setQuery = function (input){
-				this.model.query = input;
-			}
-
-			// FAKE data
-			this.suggestions = function (input){
-				return TestData.search.suggestions;
-			};
-
-			this.selectSuggestion = function (input){
-				this.setQuery (input);
-				this.search ();
-			}
-
-			this.handleChange = function (){
-				var curTermNum = this.model.query.split (' ').length;
-
-				if (this.model.lastTermNum > 2 && !this.model.query){
-					this.resetSuggestions ();
-				}
-				if (curTermNum >= this.model.lastTermNum){
-					this.model.suggestions = this.suggestions (this.model.query);
-					this.model.lastTermNum++;
-				}
-			};
-
-
-			// FAKE data
-			this.search = function (catIndex){
-				/*
-
-				*/
-				this.resetNotFound ();
-				if (this.model.query){
-					this.resetSuggestions ();
-					if (catIndex){
-						// 
-					}else{
-						this.model.results = TestData.search.results;
-					}
-					if (!this.model.results){
-						this.model.notFound.status = true;
-						this.model.notFound.content = 'Không tìm thấy kết quả cho "' + 
-							this.model.query + '"';
-					}
-				}
-			};
 		}();
 
 		vm.utility = new function (){
@@ -209,7 +140,6 @@
 			this.hideLoader = function (){
 				$(".loader").fadeOut("slow");
 			};
-
 		}();					
 
 		DataTransferService.set ('layout', vm);
