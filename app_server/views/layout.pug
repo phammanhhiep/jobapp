@@ -47,7 +47,7 @@ html(ng-app='App')
 						div(class="cell")
 							p {{ item.content }}
 					div(class="grid-x grid-margin-x")
-						div(class="small-6 cell")
+						div(class="small-9 cell")
 							ul(class="menu reactionList oneTheLeft")
 								li
 									a(class="paddingL0 statValWrapper iconComponent")
@@ -55,9 +55,13 @@ html(ng-app='App')
 										span(class="statVal auxiliaryText") {{ item.reaction.up }}
 								li
 									a(class="paddingL0 statValWrapper iconComponent")
+										i(class="material-icons") comment
+										span(class="statVal auxiliaryText") {{ item.reaction.comment }}
+								li
+									a(class="paddingL0 statValWrapper iconComponent")
 										i(class="material-icons") share
 										span(class="statVal auxiliaryText") {{ item.reaction.share }}
-						div(class="small-6 cell")
+						div(class="small-3 cell")
 							ul(class="menu float-right reactionList oneTheRight")
 								li
 									a(class="paddingR0 statValWrapper iconComponent")
@@ -111,27 +115,24 @@ html(ng-app='App')
 
 		// Mobile top bar					
 		div(class="top-bar hide-for-large" id="mobileTopBar")
-			div(class="top-bar-left")
-				ul(class="menu float-left")
-					li
-						a(href="" class="title-bar-title title paddingAll07rem") LOGO
-				ul(class="menu float-right")
-					li
-						a(class="dropDownNoIcon paddingAll07rem iconComponent" ng-click='')
-							i(class="material-icons") notifications
-					li
-						a(class="dropDownNoIcon paddingAll07rem iconComponent" ng-click='' data-open="searchBarReveal")
-							i(class="material-icons") search
-					li
-						a(class="dropDownNoIcon paddingAll07rem iconComponent" data-toggle="sideBarMenu")
-							i(class="material-icons") reorder
-		
-		//div(class='top-bar hide-for-large' id='mainMenu' ng-show='true')
-			div
-				ul(class="menu vertical")
-					li(ng-click=''): a(href='') Đánh dấu
-					li(ng-click=''): a(href='') Theo dõi
-					li(ng-click=''): a(href='')
+			ul(class="menu float-left")
+				li(ng-if="vm.dom.model.mobileNavMenu.display")
+					a(href="" class="title-bar-title title paddingAll07rem") JOBS
+				li(ng-if="vm.dom.model.backbtn.display")
+					a(class="iconComponent"): i(class="material-icons" ng-click="vm.backbtn.back ()") arrow_back
+			ul(class="menu float-right")
+				li(ng-if="vm.dom.model.mobileNavMenu.display")
+					a(class="dropDownNoIcon paddingAll07rem iconComponent" ng-click='')
+						i(class="material-icons") notifications
+				li(ng-if="vm.dom.model.mobileNavMenu.display")
+					a(class="dropDownNoIcon paddingAll07rem iconComponent" ng-click='' data-open="searchBarReveal")
+						i(class="material-icons") search
+				li(ng-if="vm.dom.model.mobileNavMenu.display")
+					a(class="dropDownNoIcon paddingAll07rem iconComponent" data-toggle="sideBarMenu")
+						i(class="material-icons") reorder
+				li(ng-if="vm.dom.model.publishbtn.display")
+					a(class="dropDownNoIcon paddingAll07rem iconComponent")
+						i(class="material-icons") send				
 
 		div(class="grid-container fluid" id="mainContentContainer")
 			ng-view
@@ -150,6 +151,8 @@ html(ng-app='App')
 		script(type="text/javascript" src="/controllers/home.ctrl.js")
 		script(type="text/javascript" src="/controllers/login.ctrl.js")
 		script(type="text/javascript" src="/controllers/register.ctrl.js")
-
+		script(type="text/javascript" src="/controllers/publish.ctrl.js")
+		script(type="text/javascript" src="/controllers/profile.ctrl.js")
+		script(type="text/javascript" src="/controllers/content.ctrl.js")
 		// DEVELOPMENT PHASE ONLY!
 		script(type="text/javascript" src="/services/testdata.service.js")

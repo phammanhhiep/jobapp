@@ -8,22 +8,26 @@
 		Layout = DataTransferService.get ('layout');
 		vm.user = Layout.user;
 
-		vm.stories = new function (){
+		vm.content = new function (){
 			this.model = {
-				stories: [],
+				content: [],
 			};
+
+			vm.dom = new function (){
+				this.model = {};
+
+				this.ready = function (){
+					Layout.dom.resetMobileNavBarMenu ();
+				};
+			}			
 
 			// FAKE DATA
 			this.fetch = function (){
 				var data = TestData.search.results;
-				this.model.stories = data;
+				this.model.content = data;
 			};
 
 			this.loadMore = function (){
-
-			};
-
-			this.open = function (index){
 
 			};
 
@@ -35,11 +39,20 @@
 
 			};
 
+			this.thumbup = function (index){
+
+			};
+
+			this.comment = function (story_index, comment_index, comment_level){
+
+			};			
+
 		}();
 
 		angular.element(document.getElementById ('mainContentContainer'))
 			.ready(function () {
-				vm.stories.fetch ();
+				vm.dom.ready ()
+				vm.content.fetch ();
 				$scope.$apply ();
 			}
 		);

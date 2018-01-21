@@ -1,0 +1,43 @@
+div(class="contentContainer" ng-if="vm.content.model.content")
+	// Content
+	div(class="contentItem")
+		div
+			h2(class="contentTitle")
+				a(ng-click="vm.content.model.content.link") {{ vm.content.model.content.title}}
+		div(class="grid-x contentAuthor")
+			div(class="small-6 cell ")
+				a(class="" ng-click="vm.content.model.content.user.profile") {{ vm.content.model.content.user.fullname }}
+			div(class="small-6 cell")
+				a(class="text-right" ng-click="vm.content.model.content.link") {{ vm.content.model.content.createdAt | date:"dd-MM-yyyy HH:mm"}}
+		div(class="grid-x contentText")
+			div(class="cell")
+				p {{ vm.content.model.content.content }}
+		div(class="grid-x grid-margin-x")
+			div(class="small-9 cell")
+				ul(class="menu reactionList oneTheLeft")
+					li
+						a(class="paddingL0 statValWrapper iconComponent")
+							i(class="material-icons") thumb_up
+							span(class="statVal auxiliaryText") {{ vm.content.model.content.reaction.up }}
+					li
+						a(class="paddingL0 statValWrapper iconComponent")
+							i(class="material-icons") comment
+							span(class="statVal auxiliaryText") {{ vm.content.model.content.reaction.comment }}
+					li
+						a(class="paddingL0 statValWrapper iconComponent")
+							i(class="material-icons") share
+							span(class="statVal auxiliaryText") {{ vm.content.model.content.reaction.share }}
+			div(class="small-3 cell")
+				ul(class="menu float-right reactionList oneTheRight")
+					li
+						a(class="paddingR0 statValWrapper iconComponent")
+							i(class="material-icons") bookmark
+							span(class="statVal auxiliaryText") {{ vm.content.model.content.reaction.save }}
+
+	// Comment
+	div(class="contentItem")
+		p COMMENT
+	div(class="contentItem")
+		p Introduce about the author
+	div(class="contentItem")
+		p Recomment content

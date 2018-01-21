@@ -24,6 +24,9 @@ router.get('/', OthersCtrl.angularApp);
 router.get('/template/home', OthersCtrl.homeTemplate);
 router.get('/template/login', OthersCtrl.loginTemplate);
 router.get('/template/register', OthersCtrl.registerTemplate);
+router.get('/template/publish', OthersCtrl.publishTemplate);
+router.get('/template/profile', OthersCtrl.profileTemplate);
+router.get('/template/content', OthersCtrl.contentTemplate);
 
 // //Login page
 // router.get('/login', OthersCtrl.login);

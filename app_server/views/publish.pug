@@ -1,0 +1,11 @@
+div(class="contentContainer")
+	div(class="contentItem publishWrapper")
+		form
+			div(class="publishTitleWrapper")
+				input(type="text", placeholder="{{ vm.dom.model.placeholder.title }}")
+			div(class="publishContentWrapper iconComponent")
+				//span(class="toolIcon")
+					<i class="material-icons">add_circle_outline</i>
+				textarea(placeholder="{{ vm.dom.model.placeholder.content }}")
+			div(class="publishTagWrapper")
+				input(type="text", placeholder="#tags")

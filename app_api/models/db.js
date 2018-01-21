@@ -32,5 +32,6 @@ require ('./params');
 require ('./queries');
 require ('./reactions');
 require ('./shares');
+require ('./save');
 require ('./users');
 require ('./views');

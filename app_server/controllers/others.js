@@ -6,6 +6,10 @@ Login, sign up, log out, home
 module.exports = new Others ();
 
 function Others (){
+	this.angularApp = function (req, res, next){
+		res.render ('layout');
+	};
+
 	this.homeTemplate = function (req, res, next){
 		res.render ('home');
 	};
@@ -18,7 +22,16 @@ function Others (){
 		res.render ('register');
 	};
 
-	this.angularApp = function (req, res, next){
-		res.render ('layout');
+	this.publishTemplate = function (req, res, next){
+		res.render ('publish');
 	};
+
+	this.profileTemplate = function (req, res, next){
+		res.render ('profile');
+	};
+
+	this.contentTemplate = function (req, res, next){
+		res.render ('content');
+	};
+
 }

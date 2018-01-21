@@ -29,6 +29,30 @@ function config ($routeProvider){
 			// },			
 			controller: 'RegisterCtrl',
 			controllerAs: 'vm',					
-		})			
+		})
+		.when ('/publish', {
+			templateUrl: '/template/publish',
+			// resolve: {
+			// 	'checkAuth': ['$q', 'authentication','$location', '$rootScope', checkAuth]
+			// },			
+			controller: 'PublishCtrl',
+			controllerAs: 'vm',					
+		})
+		.when ('/profile', {
+			templateUrl: '/template/profile',
+			// resolve: {
+			// 	'checkAuth': ['$q', 'authentication','$location', '$rootScope', checkAuth]
+			// },			
+			controller: 'ProfileCtrl',
+			controllerAs: 'vm',					
+		})	
+		.when ('/content', {
+			templateUrl: '/template/content',
+			// resolve: {
+			// 	'checkAuth': ['$q', 'authentication','$location', '$rootScope', checkAuth]
+			// },			
+			controller: 'ContentCtrl',
+			controllerAs: 'vm',					
+		})						
 		.otherwise ({redirectTo: '/'});	
 };

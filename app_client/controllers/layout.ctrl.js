@@ -6,6 +6,56 @@
 	function LayoutCtrl ($rootScope, $scope, $window, $location, authentication, DataTransferService, TestData) {
 		$scope.vm = {};
 		var vm = $scope.vm;
+
+		vm.dom = new function (){
+			this.model = {
+				backbtn: {
+					display: false,
+					lastPage: null,
+				},
+				mobileNavMenu: {
+					display: true,
+				},
+				publishbtn:{
+					display: false,
+				}
+			};
+
+			this.resetMobileNavBarMenu = function (){
+				this.model.mobileNavMenu.display = true;
+				this.model.publishbtn.display = false;
+				this.model.backbtn.display = false;
+			}
+
+			this.hideNavBarMenu = function (){
+				this.model.mobileNavMenu.display = false;
+				
+			};
+
+			this.showNavBarMenu = function (){
+				this.model.mobileNavMenu.display = true;
+			};			
+
+			this.showBackBtn = function (){
+				this.model.backbtn.display = true;
+				this.model.backbtn.lastPage = ''; // last page id or sth
+				this.hideNavBarMenu ();
+			};
+
+			this.showPublishBtn = function (){
+				this.model.publishbtn.display = true;
+				this.showBackBtn ();
+			};		
+
+
+			this.lastPage = function (){
+				// navigate to the last page
+			};
+
+			this.ready = function (){
+			}
+		}
+
 		vm.user = new function (){
 			this.model = {
 				fullname: 'Pham Manh Hiep',
@@ -56,7 +106,6 @@
 						mngtFocus: ['Trang chủ'],
 					}
 				},
-
 			}
 		}();
 
@@ -160,12 +209,12 @@
 			this.hideLoader = function (){
 				$(".loader").fadeOut("slow");
 			};
+
 		}();					
 
 		DataTransferService.set ('layout', vm);
 
 		angular.element(document).ready(function () {
-			vm.utility.hideLoader ();
 			$("body").foundation();
 			$scope.$apply();
 		});
