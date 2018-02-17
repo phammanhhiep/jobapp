@@ -38,4 +38,32 @@ function Others (){
 		res.render ('search');
 	};
 
+	this.businessTemplate = function (req, res, next){
+		res.render ('business');
+	};
+
+	this.connectionTemplate = function (req, res, next){
+		res.render ('connections');
+	};
+
+	this.conversationTemplate = function (req, res, next){
+		res.render ('conversations');
+	};
+
+	this.interestTemplate = function (req, res, next){
+		res.render ('interests');
+	};
+
+	this.notificationTemplate = function (req, res, next){
+		res.render ('notifications');
+	};
+
+	this.qaTemplate = function (req, res, next){
+		res.render ('qa');
+	};
+
+	this.saveTemplate = function (req, res, next){
+		res.render ('save');
+	};	
+
 }

@@ -20,6 +20,7 @@ var ContentSchema = mongoose.Schema ({
 	comments: {count: Number, updatedAt: Date},
 	shares: {count: Number, updatedAt: Date},
 	likes: {count: Number, updatedAt: Date}, // reactions
+	saving: {count: Number, updatedAt: Date}, // reactions
 	reports: [{createdAt: Date, reason: Number, desc: String}],
 	createdAt: {type: Date, default: Date.now},
 	updatedAt: [{
@@ -27,54 +28,17 @@ var ContentSchema = mongoose.Schema ({
 		reasons: String,
 		by: mongoose.Schema.Types.ObjectId // user or admin
 	}],	
-});
-
-var JobPostingSchema = mongoose.Schema ({
-	userid: mongoose.Schema.Types.ObjectId,
-	business: mongoose.Schema.Types.ObjectId,
-	categories: [Number],
-	tags: [String],
-	title: String,
-	content: String,
+	/// Job posting
 	application:[{
 		candidateid: mongoose.Schema.Types.ObjectId,
-		createdAt: {type: Date, default: Date.now}
-	}],
-	likes: {count: Number, updatedAt: Date}, // reactions
-	shares: {count: Number, updatedAt: Date},
-	reports: [{createdAt: Date, reason: Number, desc: String}],
-	createdAt: {type: Date, default: Date.now},
-	updatedAt: [{
-		time: {type: Date}, 
-		reasons: String,
-		by: mongoose.Schema.Types.ObjectId // user or admin
+		createdAt: {type: Date, default: Date.now},
 	}],	
-});
-
-var JobRequestSchema = mongoose.Schema ({
-	userid: mongoose.Schema.Types.ObjectId,
-	categories: [Number],
-	tags: [String],
-	title: String,
-	content: String,
-	createdAt: {type: Date, default: Date.now},
-	Recommended:[{
+	/// Job requesting
+	recommended:[{
 		jobid: mongoose.Schema.Types.ObjectId,
 		recommender: mongoose.Schema.Types.ObjectId,
 		createdAt: {type: Date, default: Date.now}
-	}],
-	comments: {count: Number, updatedAt: Date},
-	likes: {count: Number, updatedAt: Date}, // reactions
-	shares: {count: Number, updatedAt: Date},
-	reports: [{createdAt: Date, reason: Number, desc: String}],
-	createdAt: {type: Date, default: Date.now},	
-	updatedAt: [{
-		time: {type: Date}, 
-		reasons: String,
-		by: mongoose.Schema.Types.ObjectId // user or admin
 	}],	
 });
 
 mongoose.model ('Contents', ContentSchema);
-mongoose.model ('JobPostings', JobPostingSchema);
-mongoose.model ('JobRequests', JobRequestSchema);

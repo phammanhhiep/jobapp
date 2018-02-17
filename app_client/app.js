@@ -38,7 +38,7 @@ function config ($routeProvider){
 			controller: 'PublishCtrl',
 			controllerAs: 'vm',					
 		})
-		.when ('/profile', {
+		.when ('/profile/:userid', {
 			templateUrl: '/template/profile',
 			// resolve: {
 			// 	'checkAuth': ['$q', 'authentication','$location', '$rootScope', checkAuth]
@@ -46,7 +46,7 @@ function config ($routeProvider){
 			controller: 'ProfileCtrl',
 			controllerAs: 'vm',					
 		})	
-		.when ('/content', {
+		.when ('/content/:contentid', {
 			templateUrl: '/template/content',
 			// resolve: {
 			// 	'checkAuth': ['$q', 'authentication','$location', '$rootScope', checkAuth]
@@ -61,6 +61,54 @@ function config ($routeProvider){
 			// },			
 			controller: 'SearchCtrl',
 			controllerAs: 'vm',					
-		})							
+		})
+		.when ('/business/:buisnessid', {
+			templateUrl: '/template/business',
+			// resolve: {
+			// 	'checkAuth': ['$q', 'authentication','$location', '$rootScope', checkAuth]
+			// },			
+			controller: 'BusinessCtrl',
+			controllerAs: 'vm',					
+		})
+		.when ('/notifications/', {
+			templateUrl: '/template/notifications',
+			// resolve: {
+			// 	'checkAuth': ['$q', 'authentication','$location', '$rootScope', checkAuth]
+			// },			
+			controller: 'NotificationCtrl',
+			controllerAs: 'vm',					
+		})
+		.when ('/save/', {
+			templateUrl: '/template/save',
+			// resolve: {
+			// 	'checkAuth': ['$q', 'authentication','$location', '$rootScope', checkAuth]
+			// },			
+			controller: 'SaveCtrl',
+			controllerAs: 'vm',					
+		})
+		.when ('/interests/', {
+			templateUrl: '/template/interests',
+			// resolve: {
+			// 	'checkAuth': ['$q', 'authentication','$location', '$rootScope', checkAuth]
+			// },			
+			controller: 'InterestCtrl',
+			controllerAs: 'vm',					
+		})
+		.when ('/conversations/', {
+			templateUrl: '/template/conversations',
+			// resolve: {
+			// 	'checkAuth': ['$q', 'authentication','$location', '$rootScope', checkAuth]
+			// },			
+			controller: 'ConversationCtrl',
+			controllerAs: 'vm',					
+		})
+		.when ('/connections', {
+			templateUrl: '/template/connections',
+			// resolve: {
+			// 	'checkAuth': ['$q', 'authentication','$location', '$rootScope', checkAuth]
+			// },			
+			controller: 'ConnectionCtrl',
+			controllerAs: 'vm',					
+		})													
 		.otherwise ({redirectTo: '/'});	
 };

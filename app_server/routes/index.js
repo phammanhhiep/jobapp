@@ -20,7 +20,12 @@ var OthersCtrl = require ('../controllers/others');
 
 router.get('/', OthersCtrl.angularApp);
 
-// // Get template
+// Favicon
+router.get('/favicon.ico', function (req,res,next){
+	res.status (204);
+});
+
+// Get template
 router.get('/template/home', OthersCtrl.homeTemplate);
 router.get('/template/login', OthersCtrl.loginTemplate);
 router.get('/template/register', OthersCtrl.registerTemplate);
@@ -28,6 +33,15 @@ router.get('/template/publish', OthersCtrl.publishTemplate);
 router.get('/template/profile', OthersCtrl.profileTemplate);
 router.get('/template/content', OthersCtrl.contentTemplate);
 router.get('/template/search', OthersCtrl.searchTemplate);
+router.get('/template/business', OthersCtrl.businessTemplate);
+router.get('/template/connections', OthersCtrl.connectionTemplate);
+router.get('/template/conversations', OthersCtrl.conversationTemplate);
+router.get('/template/interest', OthersCtrl.interestTemplate);
+router.get('/template/notifications', OthersCtrl.notificationTemplate);
+router.get('/template/qa', OthersCtrl.qaTemplate);
+router.get('/template/save', OthersCtrl.saveTemplate);
+
+
 // //Login page
 // router.get('/login', OthersCtrl.login);
 // router.get('/register', OthersCtrl.register);

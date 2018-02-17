@@ -7,7 +7,7 @@
 		var vm = this;
 		Layout = DataTransferService.get ('layout');
 		vm.user = Layout.user;
-
+		vm.utility = Layout.utility;
 		vm.content = new function (){
 			this.model = {
 				content: [],
@@ -48,6 +48,8 @@
 			};			
 
 		}();
+
+
 
 		angular.element(document.getElementById ('mainContentContainer'))
 			.ready(function () {

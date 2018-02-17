@@ -1,9 +1,9 @@
 (function (){
 	angular
 		.module ('App')
-		.controller ('ProfileCtrl', ['DataTransferService', ProfileCtrl])
+		.controller ('ConnectionCtrl', ['DataTransferService', ConnectionCtrl])
 
-	function ProfileCtrl (DataTransferService){
+	function ConnectionCtrl (DataTransferService){
 		var vm = this;
 		Layout = DataTransferService.get ('layout');
 		vm.user = Layout.user;

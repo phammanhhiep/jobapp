@@ -35,3 +35,8 @@ require ('./shares');
 require ('./save');
 require ('./users');
 require ('./views');
+
+// crawling database
+require ('./rawContents');
+require ('./crawledPages');
+require ('./tempUsers');

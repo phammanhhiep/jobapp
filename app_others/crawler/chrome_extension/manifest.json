@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "Nghe AZ crawlers",
+  "description": "Allow to crawl data from predefined sites.",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "static/img/icon.png",
+    "default_popup": "static/html/popup.html"
+  },
+  "background":{
+    "scripts": ["static/vendors/js/jquery-3.3.1.min.js", "background/eventPage.js"],
+    "persistent": false
+  },
+  "content_scripts":[{
+      "matches": ["https://www.facebook.com/groups/*", "file:///C:/Users/Acer/Desktop/*"],
+      "js": ["static/vendors/js/jquery-3.3.1.min.js", "contentScripts/extractFbGroups.js"] 
+    }],
+  "permissions": [
+    "<all_urls>",
+    "storage",
+    "tabs",
+    "activeTab"
+  ]  
+}

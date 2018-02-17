@@ -1,34 +1,28 @@
-div(ng-if="vm.content.model.content" class="menu contentContainer" )
-	div(ng-repeat="item in vm.content.model.content" class="contentItem")
-		div
-			h2(class="contentTitle")
-				a(ng-click="item.link") {{ item.title}}
-		div(class="grid-x contentAuthor")
-			div(class="small-6 cell ")
-				a(class="" ng-click="item.user.profile") {{ item.user.fullname }}
-			div(class="small-6 cell")
-				a(class="text-right" ng-click="item.link") {{ item.createdAt | date:"dd-MM-yyyy HH:mm"}}
-		div(class="grid-x contentText")
-			div(class="cell")
-				p {{ item.content }}
-		div(class="grid-x grid-margin-x")
-			div(class="small-9 cell")
-				ul(class="menu reactionList oneTheLeft")
+div(ng-if="vm.content.model.content" class="menu" )
+	div(ng-repeat="item in vm.content.model.content" class="card contentCard")
+		img(ng-src="{{ item.cover }}")
+		div(class="card-section card")
+			div(class="card-divider")
+				h2
+					a(class="contentTitle" href="{{ item.path }}") {{ item.title }}
+			div(class="contentText")
+				p {{ item.content }}			
+		div(class="card-divider grid-x")
+			div(class="small-8 cell authorship")
+				ul(class="menu")
+					li(class="avatar")
+						a(href="{{ item.path }}"): img(ng-src="{{ item.user.avatar }}")
+					li(class="avatar-text")
+						ul(class="menu vertical")
+							li
+								a(class="" href="{{ item.user.profile }}") {{ item.user.fullname }}
+							li
+								a(class="" href="{{ item.path }}") {{ item.createdAt | date:"dd-MM, yyyy"}}
+			div(class="small-4 cell")
+				ul(class="menu float-right settingList")
 					li
-						a(class="paddingL0 statValWrapper iconComponent")
-							i(class="material-icons") thumb_up
-							span(class="statVal auxiliaryText") {{ item.reaction.up }}
+						a(class="iconComponent")
+							i(class="material-icons") bookmark_border
 					li
-						a(class="paddingL0 statValWrapper iconComponent")
-							i(class="material-icons") comment
-							span(class="statVal auxiliaryText") {{ item.reaction.comment }}
-					li
-						a(class="paddingL0 statValWrapper iconComponent")
-							i(class="material-icons") share
-							span(class="statVal auxiliaryText") {{ item.reaction.share }}
-			div(class="small-3 cell")
-				ul(class="menu float-right reactionList oneTheRight")
-					li
-						a(class="paddingR0 statValWrapper iconComponent")
-							i(class="material-icons") bookmark
-							span(class="statVal auxiliaryText") {{ item.reaction.save }}
+						a(class="iconComponent")
+							i(class="material-icons") keyboard_arrow_down

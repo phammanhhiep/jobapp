@@ -2,10 +2,10 @@ div(class="searchBarWrapper" id="searchBarReveal")
 	// Search bar
 	div(class="searchBar")
 		ul(class="menu")
-			li(class="menu-text resetInputButton iconComponent" ng-click="vm.search.resetQuery ()")
+			li(class="menu-text closeBtn iconComponent" ng-click="vm.search.resetQuery ()")
 				i(class="material-icons") close
-			li(class="menu-text closeRevealButton close-button iconComponent" data-close ng-click="vm.search.close ()")
-				i(class="material-icons") arrow_back				
+			li(class="menu-text backBtn iconComponent")
+				i(class="material-icons" ng-click="vm.utility.back()") arrow_back				
 			li(class="inputWrapper")
 				form(ng-submit="vm.search.search ()")
 					input(class="maxWidth100 margin0" type="search" placeholder="Search" ng-model='vm.search.model.query' ng-change='vm.search.handleChange ()')
@@ -14,43 +14,38 @@ div(class="searchBarWrapper" id="searchBarReveal")
 				li(class="" ng-repeat="item in vm.search.model.suggestions" ng-click="vm.search.selectSuggestion (item.content)")
 					a {{ item.content}}
 	// Categories bar
-	div(ng-if="vm.dom.model.categories.exist")
-		ul(class="menu categories expanded")
+	div(ng-if="vm.dom.model.categories.exist" class="categories")
+		ul(class="menu expanded")
 			li(ng-repeat="cat in vm.dom.model.categories.categories")
 				a(class="button", ng-click="vm.search.search ($index)") {{ cat }}
 
 	// Results
-	div(ng-if="vm.search.model.results" class="menu contentContainer")
-		div(ng-repeat="item in vm.search.model.results" class="contentItem")
-			div
-				h2(class="contentTitle")
-					a(href="{{item.link}}") {{ item.title}}
-			div(class="grid-x contentAuthor")
-				div(class="small-6 cell")
-					a(class="" href="{{ item.user.profile }}") {{ item.user.fullname }}
-				div(class="small-6 cell")
-					a(class="text-right" href="{{ item.link }}") {{ item.createdAt | date:"dd-MM-yyyy HH:mm"}}
-			div(class="grid-x contentText")
-				div(class="cell")
-					p {{ item.content }}
-			div(class="grid-x grid-margin-x")
-				div(class="small-9 cell")
-					ul(class="menu reactionList oneTheLeft")
+	div(ng-if="vm.search.model.results" class="menu")
+		div(ng-repeat="item in vm.search.model.results" class="card contentCard")
+			div(class="card-divider grid-x")
+				div(class="small-8 cell authorship")
+					ul(class="menu")
+						li(class="avatar")
+							a(href="{{ item.path }}"): img(ng-src="{{ item.user.avatar }}")
+						li(class="avatar-text")
+							ul(class="menu vertical")
+								li
+									a(class="authorFullname" href="{{ item.user.profile }}") {{ item.user.fullname }}
+								li
+									a(class="createdDate" href="{{ item.path }}") {{ item.createdAt | date:"dd-MM, yyyy"}}			
+			//img(ng-src="{{ item.cover }}")
+			div(class="card-section card")
+				div(class="card-divider")
+					h2
+						a(class="contentTitle" href="{{ item.path }}") {{ item.title }}
+				div(class="contentText")
+					p {{ item.content }}			
+			div(class="card-divider grid-x")
+				div(class="small-offset-8 small-4 cell")
+					ul(class="menu float-right settingList")
 						li
-							a(class="paddingL0 statValWrapper iconComponent")
-								i(class="material-icons") thumb_up
-								span(class="statVal auxiliaryText") {{ item.reaction.up }}
+							a(class="iconComponent")
+								i(class="material-icons") bookmark_border
 						li
-							a(class="paddingL0 statValWrapper iconComponent")
-								i(class="material-icons") comment
-								span(class="statVal auxiliaryText") {{ item.reaction.comment }}
-						li
-							a(class="paddingL0 statValWrapper iconComponent")
-								i(class="material-icons") share
-								span(class="statVal auxiliaryText") {{ item.reaction.share }}
-				div(class="small-3 cell")
-					ul(class="menu float-right reactionList oneTheRight")
-						li
-							a(class="paddingR0 statValWrapper iconComponent")
-								i(class="material-icons") bookmark
-								span(class="statVal auxiliaryText") {{ item.reaction.save }}
+							a(class="iconComponent")
+								i(class="material-icons") keyboard_arrow_down

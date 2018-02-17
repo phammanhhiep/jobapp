@@ -71,6 +71,12 @@ a:visted{
 	max-width: 100%!important;
 }
 
+/* Layout page */
+#mainContentContainer{
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}
+
 /* Component: Search bar */
 .searchBarWrapper {
 	/*background-color: #e6e6e6;*/
@@ -80,7 +86,7 @@ a:visted{
 	left: 0!important;
 	height: 100%;
 	width: 100%;
-	border-bottom: 1px solid #e6e6e6;
+	/*border-bottom: 1px solid #e6e6e6;*/
 	/*box-shadow: 0 1px 5px #e6e6e6;*/
 }
 
@@ -137,6 +143,25 @@ a:visted{
 	/*box-shadow: none!important;*/
 }
 
+.searchBar .closeBtn{
+	position: absolute;
+	right:10px;
+	padding-bottom: 0!important;
+	padding-top: 0.5rem!important;
+	padding-right: 0!important;
+	cursor: pointer;	
+}
+
+
+.searchBar .backBtn{
+	position: absolute;	
+	left: 10px;
+	padding-bottom: 0!important;
+	padding-top: 0.5rem!important;
+	padding-left: 0!important;
+	cursor: pointer;
+}
+
 /* A list of items */
 .itemList {
 	padding: 0 1px;
@@ -155,38 +180,13 @@ a:visted{
 }
 
 
-/* Close reveal button */
-.closeRevealButton {
-	padding-bottom: 0!important;
-	padding-top: 0.5rem!important;
-	padding-left: 0!important;
-	position: absolute;
-}
-
-.closeRevealButton.close-button{
-	right:inherit;
-	top:inherit;
-	left: 10px;
-	font-size:inherit 
-}
-
-/* Reset-input button */
-.resetInputButton {
-	position: absolute;
-	right:10px;
-	padding-bottom: 0!important;
-	padding-top: 0.5rem!important;
-	padding-right: 0!important;
-	cursor: pointer;
-}
-
 /* Result Box: suggestion, search result, and so on */
 #searchBarReveal .categories {
-
+	margin-bottom: 20px;
 }
 
 #searchBarReveal .categories {
-	border-bottom: 1px solid #A0A0A0;
+	/*border-bottom: 1px solid #A0A0A0;*/
 	/*padding: 0 0.7rem;*/
 }
 
@@ -230,6 +230,7 @@ a:visted{
 	font-size: 0.9rem;
 	display: block
 }
+
 
 .contentItem .contentText{
 	padding: 1rem 0;
@@ -341,6 +342,63 @@ a:visted{
 	font-weight: 600;
 	color: #0A0A0A;
 }
+
+/* ----------- Home page --------------- */
+.contentCard{
+	margin-bottom: 1.5rem;
+}
+
+.contentCard .card-divider{
+	background-color: transparent;
+} 
+
+.contentCard .card {
+	background-color: transparent;
+	border: none;
+	padding-bottom: 0;
+	padding-top: 0;
+}
+
+.card-section.card .card-divider{
+	padding-left: 0;
+	padding-right: 0; 
+}
+
+.card-section.card .card-divider .contentTitle{
+	padding: 0;
+	font-weight: 600;
+}
+
+.contentCard .authorship{
+	font-size: 0.8rem;
+	display: block;
+}
+
+.contentCard .authorship .avatar a{
+	padding: 0;
+}
+
+.contentCard .authorship .avatar img{
+	border-radius: 100px;
+}
+
+.contentCard .authorship .avatar-text a{
+	padding: .4rem 1rem 0 1rem!important;
+}
+
+.contentCard .settingList .iconComponent{
+	padding-left: .3rem;
+	padding-right: 0;
+}
+
+.authorship .createdDate{
+	color: #A0A0A0;
+}
+
+.authorship .authorFullname{
+	font-weight: 600;
+}
+
 
 /* ----------- Publish page ------------- */
 .publishTitleWrapper input{

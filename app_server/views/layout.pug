@@ -58,7 +58,7 @@ html(ng-app='App')
 				li(ng-if="vm.dom.model.mobileNavMenu.logo.display")
 					a(href="" class="title-bar-title title paddingAll07rem") JOBS
 				li(ng-if="vm.dom.model.backbtn.display")
-					a(class="iconComponent"): i(class="material-icons" ng-click="vm.backbtn.back ()") arrow_back
+					a(class="iconComponent"): i(class="material-icons" ng-click="vm.utility.back()") arrow_back
 			ul(class="menu float-right")
 				li(ng-if="vm.dom.model.mobileNavMenu.noti.display")
 					a(class="dropDownNoIcon paddingAll07rem iconComponent" ng-click='')
@@ -83,8 +83,12 @@ html(ng-app='App')
 		script(type="text/javascript" src="/vendor/js/foundation.min.js")
 		script(type="text/javascript" src="/app.js")
 		// Services
-		script(type="text/javascript" src="/services/authentication.service.js")
 		script(type="text/javascript" src="/services/utility.service.js")
+		script(type="text/javascript" src="/services/authentication.service.js")
+		script(type="text/javascript" src="/services/search.service.js")
+		script(type="text/javascript" src="/services/users.service.js")
+		script(type="text/javascript" src="/services/conversations.service.js")
+		script(type="text/javascript" src="/services/content.service.js")
 		// Controllers		
 		script(type="text/javascript" src="/controllers/layout.ctrl.js")
 		script(type="text/javascript" src="/controllers/home.ctrl.js")
@@ -94,5 +98,6 @@ html(ng-app='App')
 		script(type="text/javascript" src="/controllers/profile.ctrl.js")
 		script(type="text/javascript" src="/controllers/content.ctrl.js")
 		script(type="text/javascript" src="/controllers/search.ctrl.js")
+		script(type="text/javascript" src="/controllers/business.ctrl.js")
 		// DEVELOPMENT PHASE ONLY!
 		script(type="text/javascript" src="/services/testdata.service.js")

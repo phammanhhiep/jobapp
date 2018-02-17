@@ -1,13 +1,13 @@
 (function (){
 	angular
 		.module ('App')
-		.controller ('ContentCtrl', ['DataTransferService', '$scope', 'TestData', ContentCtrl])
+		.controller ('ContentCtrl', ['DataTransferService', '$scope', '$routeParams', '$location', 'TestData', ContentCtrl])
 
-	function ContentCtrl (DataTransferService, $scope, TestData){
+	function ContentCtrl (DataTransferService, $scope, $routeParams, $location, TestData){
 		var vm = this;
 		Layout = DataTransferService.get ('layout');
 		vm.user = Layout.user;
-
+		
 		vm.dom = new function (){
 			this.model = {};
 
@@ -18,6 +18,7 @@
 
 		vm.content = new function (){
 			this.model = {
+				_id: $routeParams.contentid,
 				content: null,
 				comments: null,
 			};

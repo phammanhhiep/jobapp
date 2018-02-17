@@ -1,23 +1,32 @@
 (function (){
 	angular
 		.module ('App')
-		.controller ('SearchCtrl', ['DataTransferService', '$scope', 'TestData', SearchCtrl])
+		.controller ('SearchCtrl', ['$scope', 'DataTransferService', 'SearchService', 'TestData', SearchCtrl])
 
-	function SearchCtrl (DataTransferService, $scope, TestData){
+	function SearchCtrl ($scope, DataTransferService, SearchService, TestData){
 		var vm = this;
 		Layout = DataTransferService.get ('layout');
 		vm.user = Layout.user;
-
+		vm.utility = Layout.utility;
 		vm.dom = new function (){
 			this.model = {
 				categories: {
-					exist: true,
+					exist: false,
 					categories: ['Việc làm', 'Blog', 'Cá nhân', 'Tổ chức'],
 				},				
 			};
 
 			this.ready = function (){
 				Layout.dom.showSearchNavBar ();
+			};
+
+			this.showCategories = function (){
+				this.model.categories.exist = true;
+
+			}
+
+			this.hideCategories = function (){
+				this.model.categories.exist = false;
 			}
 		}
 
@@ -33,15 +42,15 @@
 				}
 			};
 
-			this.close = function (){
-				/*
-				Close the search div and reset all component of the search div.
-				*/
-				this.model.query = '';
-				this.model.results = '';
-				this.model.suggestions = null;
-				this.model.lastTermNum = 2;
-			};
+			// this.close = function (){
+			// 	/*
+			// 	Close the search div and reset all component of the search div.
+			// 	*/
+			// 	this.model.query = '';
+			// 	this.model.results = '';
+			// 	this.model.suggestions = null;
+			// 	this.model.lastTermNum = 2;
+			// };
 
 			this.resetSuggestions = function (){
 				this.model.lastTermNum = 2;
@@ -89,6 +98,7 @@
 
 			// FAKE data
 			this.search = function (catIndex){
+				var thisObj = this;
 				/*
 
 				*/
@@ -98,7 +108,15 @@
 					if (catIndex){
 						// 
 					}else{
-						this.model.results = TestData.search.results;
+						SearchService.search (this.model.query)
+							.then (function success (data){
+								console.log (data)
+								vm.dom.showCategories ();
+								thisObj.model.results = TestData.search.results;
+
+							},function error (err){
+								console.log (err);
+							});
 					}
 					if (!this.model.results){
 						this.model.notFound.status = true;

@@ -140,6 +140,10 @@
 			this.hideLoader = function (){
 				$(".loader").fadeOut("slow");
 			};
+
+			this.back = function (){
+				$window.history.back ();
+			}
 		}();					
 
 		DataTransferService.set ('layout', vm);
